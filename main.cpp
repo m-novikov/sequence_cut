@@ -38,6 +38,8 @@ static void show_usage(std::string name)
 }
 
 int main(int argc, char* argv[]) {
+    srand(time(0));
+
     int size = 365;
     int delId;
 
