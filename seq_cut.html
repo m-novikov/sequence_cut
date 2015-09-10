@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Обрезание последовательности</title>
+	<script type="text/javascript">
+		var Download = {
+			click : function(node) {
+				var ev = document.createEvent("MouseEvents");
+				ev.initMouseEvent("click", true, false, self, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+				return node.dispatchEvent(ev);
+			},
+			encode : function(data) {
+					return 'data:application/octet-stream;base64,' + btoa( data );
+			},
+			link : function(data, name){
+				var a = document.createElement('a');
+				a.download = name || self.location.pathname.slice(self.location.pathname.lastIndexOf('/')+1);
+				a.href = data || self.location.href;
+				return a;
+			}
+		};
+		Download.save = function(data, name){
+			this.click(
+				this.link(
+					this.encode( data ),
+					name
+				)
+			);
+		};	
+		function $(id) { return document.getElementById(id); };
+		window.onload = function() {
+			input_file = $('input_file');
+			$('load_btn').onclick = function(e) {
+				var reader = new FileReader();
+				reader.onload = function(e) { 
+					$('text').value = e.target.result;
+				}
+				reader.readAsText(input_file.files[0]);
+			}
+			$('cut_btn').onclick = function(e) {
+				var text = $('text').value;
+				var cut_size = parseInt($('cut_size').value, 10);
+				var text_elems = text.split(' ');
+				while (text_elems.join(' ').length > cut_size) {
+					var randIdx = Math.floor(Math.random() * text_elems.length);
+					text_elems.splice(randIdx, 1);
+				}
+				$('cutted_size').innerHTML = text_elems.join(' ').length;
+				$('result').value = text_elems.join(' ');
+			}
+			$('save_btn').onclick = function(e) {
+				Download.save($('result').value, 'out.txt');
+			}
+			
+		}
+	
+	</script>
+	<style type="text/css">
+		html, body, div, p {
+			margin: 0;
+			padding: 0;
+		}
+		.b-step_info {
+			margin-bottom: 0.5em;
+			font-weight: bold;
+		}
+		.b-step {
+			padding: 1em;
+		}
+		.b-step1 {
+			background: #ADD8E6;
+		}
+		.b-step2 {
+			background: #87CEEB;
+		}
+		
+		.b-step3 {
+			background: #4169E1;
+		}
+		
+		#result {
+			background: white;
+		}
+	</style>
+</head>
+<body>
+<div class="b-step b-step1">
+	<p class="b-step_info">1. Загрузите файл или вставьте текстовую строку в поле:</p>
+	<textarea id="text" rows="8" cols="100"></textarea>
+	<div class="b-step1_controls">
+		<input type="file" id="input_file" />
+		<input type="button" value="Загрузить" id="load_btn" />
+	</div>
+</div>
+<div class="b-step b-step2">
+<div>
+<p class="b-step_info">2. Укажите размер строки до которой требуется обрезать файл:</p>
+<label for="cut_size">Размер конечного файла</label>
+<input type="text" value="365" id="cut_size" />
+</div>
+<input type="button" value="Обработать" id="cut_btn" />
+</div>
+<div class="b-step b-step3">
+<div>
+<p class="b-step_info">3. Скопируйте полученный результат</p>
+<p class="b-step_info">Размер полученной строки: <span id="cutted_size"></span></p>
+<textarea id="result" rows="8" cols="100"></textarea>
+</div>
+<input type="button" value="Сохранить" id="save_btn" />
+</div>
+
+</body>
+</html>
