@@ -1,4 +1,27 @@
-﻿<!DOCTYPE html>
+﻿<!--
+The MIT License (MIT)
+
+Copyright (c) 2014 Maxim Novikov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Обрезание последовательности</title>
@@ -56,7 +79,7 @@
 	
 	</script>
 	<style type="text/css">
-		html, body, div, p {
+		* {
 			margin: 0;
 			padding: 0;
 		}
@@ -81,16 +104,21 @@
 		#result {
 			background: white;
 		}
+        .b-copyright {
+            text-align: right;
+            font-size: 0.8em;
+            padding-right: 0.2em;
+        }
 	</style>
 </head>
 <body>
 <div class="b-step b-step1">
-	<p class="b-step_info">1. Загрузите файл или вставьте текстовую строку в поле:</p>
-	<textarea id="text" rows="8" cols="100"></textarea>
-	<div class="b-step1_controls">
-		<input type="file" id="input_file" />
-		<input type="button" value="Загрузить" id="load_btn" />
-	</div>
+    <p class="b-step_info">1. Загрузите файл или вставьте текстовую строку в поле:</p>
+    <textarea id="text" rows="8" cols="100"></textarea>
+    <div class="b-step1_controls">
+        <input type="file" id="input_file" />
+        <input type="button" value="Загрузить" id="load_btn" />
+    </div>
 </div>
 <div class="b-step b-step2">
 <div>
@@ -108,6 +136,8 @@
 </div>
 <input type="button" value="Сохранить" id="save_btn" />
 </div>
-
+<footer>
+    <p class="b-copyright">The MIT License (MIT). Copyright © 2014 <a href="https://github.com/m-novikov">Maxim Novikov</a></p>
+</footer>
 </body>
 </html>
